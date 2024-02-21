@@ -1,6 +1,13 @@
-import Card from "./components/Card";
+import Card from "./components/Card/Card";
 import Drawer from "./components/Drawer";
 import Header from "./components/Header";
+
+const cards = [
+  { title: "Men's sneakers Nike Blaizer Mid Suede", price: 49.99, imageUrl: "/img/sneakers/1.jpg" },
+  { title: "Men's sneakers Nike Air Max 270", price: 49.99, imageUrl: "/img/sneakers/2.jpg" },
+  { title: "Men's sneakers Nike Blaizer Mid Suede", price: 39.99, imageUrl: "/img/sneakers/3.jpg" },
+  { title: "Sneakers Puma Aka Boku Future Rider ", price: 44.99, imageUrl: "/img/sneakers/4.jpg" },
+]
 
 export default function App() {
   return <div className="wrapper clear">
@@ -19,7 +26,17 @@ export default function App() {
 
       <div className="d-flex">
 
-        <Card />
+        {cards.map((card, index) => (
+          <Card
+            key={index}
+            {...card} />
+          // title={obj.title}
+          // price={obj.price} .. sprad the same
+          // imageUrl={obj.imageUrl}
+
+        ))
+        }
+
 
       </div>
 
