@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Card from "./components/Card/Card";
 import Drawer from "./components/Drawer";
 import Header from "./components/Header";
@@ -10,10 +11,12 @@ const cards = [
 ]
 
 export default function App() {
-  return <div className="wrapper clear">
-    <Drawer />
+  const [cartOpened, setCartOpened] = useState(false)
 
-    <Header />
+  return <div className="wrapper clear">
+    {cartOpened ? <Drawer onClose={() => setCartOpened(false)} /> : null}
+
+    <Header onClickCart={() => setCartOpened(true)} />
 
     <div className="content p-40 ">
       <div className="d-flex align-center justify-between mb-40">
@@ -28,8 +31,12 @@ export default function App() {
 
         {cards.map((card, index) => (
           <Card
+            {...card}
             key={index}
-            {...card} />
+            onFavorite={() => console.log("Added to favorite")}
+            onPlus={() => console.log("Clicked plus")}
+          />
+
           // title={obj.title}
           // price={obj.price} .. sprad the same
           // imageUrl={obj.imageUrl}

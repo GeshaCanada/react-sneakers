@@ -1,10 +1,10 @@
-export default function Drawer() {
+export default function Drawer(props) {
   return (
-    <div style={{ display: "none" }} className="overlay">
+    <div className="overlay">
       <div className="drawer">
         <h3 className="d-flex justify-between mb-30">
           Shopping cart
-          <img className="cu-p" src="/img/btn_remove.svg" alt="Remove  " />
+          <img onClick={props.onClose} className="cu-p" src="/img/btn_remove.svg" alt="Close" />
         </h3>
 
         <div className="items">
@@ -13,7 +13,7 @@ export default function Drawer() {
               style={{ backgroundImage: "url(/img/sneakers/1.jpg)" }}
               className="cartItemImg"
             ></div>
-            <div className="mr-20">
+            <div className="mr-20 flexS ">
               <p className="mb-5">Men's sneakers Nike Blaizer Mid Suede</p>
               <b>49.99$</b>
             </div>
