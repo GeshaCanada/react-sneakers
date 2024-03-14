@@ -1,19 +1,22 @@
+import { Link } from "react-router-dom";
+
 export default function Header(props) {
   return (
     <header className="d-flex justify-between align-center p-40 ">
-      <div className="d-flex align-center">
-        <img
-          width={40}
-          height={40}
-          src="/img/logo.png"
-          alt="Logo for sneakers shop"
-        />
-
-        <div>
-          <h3 className="text-uppercase">React Sneakers</h3>
-          <p className="opacity-6">The best shoes shop</p>
+      <Link to="/">
+        <div className="d-flex align-center">
+          <img
+            width={40}
+            height={40}
+            src="/img/logo.png"
+            alt="Logo for sneakers shop"
+          />
+          <div>
+            <h3 className="text-uppercase">React Sneakers</h3>
+            <p className="opacity-6">The best shoes shop</p>
+          </div>
         </div>
-      </div>
+      </Link>
 
       <ul className="d-flex">
         <li onClick={props.onClickCart} className="mr-30 cu-p">
@@ -24,6 +27,16 @@ export default function Header(props) {
             alt="Shop's cart"
           />
           <span>120.00$</span>
+        </li>
+        <li className="mr-20 cu-p">
+          <Link to="/favorites">
+            <img
+              width={18}
+              height={18}
+              src="/img/favorite_heart.svg"
+              alt="Bookmarks"
+            />
+          </Link>
         </li>
         <li>
           <img
