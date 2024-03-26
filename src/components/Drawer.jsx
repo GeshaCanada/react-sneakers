@@ -17,8 +17,8 @@ export default function Drawer({ onClose, onRemove, items = [] }) {
             <div className="items">
               {items.map((obj) => (
                 <div
-                  className="cartItem d-flex align-center mb-20"
                   key={obj.id}
+                  className="cartItem d-flex align-center mb-20"
                 >
                   <div
                     style={{ backgroundImage: `url(${obj.imageUrl})` }}
@@ -27,7 +27,7 @@ export default function Drawer({ onClose, onRemove, items = [] }) {
 
                   <div className="mr-20 flex ">
                     <p className="mb-5">{obj.title}</p>
-                    <b>{obj.price}</b>
+                    <b>{obj.price}$</b>
                   </div>
                   <img
                     onClick={() => onRemove(obj.id)}
