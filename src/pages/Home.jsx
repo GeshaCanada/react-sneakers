@@ -2,7 +2,6 @@ import Card from "../components/Card/Card";
 
 export default function Home({
   items,
-  cartItems,
   searchValue,
   setSearchValue,
   onChangeSearchInput,
@@ -16,14 +15,13 @@ export default function Home({
     );
     return (isLoading ? [...Array(8)] : filteredItems).map((item, index) => (
       <Card
-        key= {isLoading ? `loading-${index}` : index}
+        key={index}
         onFavorite={(obj) => {
           onAddToFavorite(obj);
         }}
         onPlus={(obj) => {
           onAddToCart(obj);
         }}
-        added={cartItems.some((obj) => (obj.id) === (item.id))}
         loading={isLoading}
         {...item}
       />
