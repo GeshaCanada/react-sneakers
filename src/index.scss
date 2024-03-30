@@ -135,6 +135,10 @@ header {
   }
   .greenButton {
     position: relative;
+    &:disabled {
+      background-color: #bebebe !important;
+      cursor: default;
+    }
 
     &:hover {
       img {
