@@ -15,6 +15,7 @@ export default function App() {
   const [cartOpened, setCartOpened] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
+
   useEffect(() => {
     async function fetchData() {
 
@@ -91,7 +92,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home
             items={items}
-            cartItems={cartItems}
+            //cartItems={cartItems}
             searchValue={searchValue}
             setSearchValue={setSearchValue}
             onChangeSearchInput={onChangeSearchInput}

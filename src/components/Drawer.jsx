@@ -1,10 +1,10 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import Info from "./Info";
-import AppContext from "../context";
 import axios from "axios";
+import { useCart } from "./hooks/useCart";
 
 export default function Drawer({ onClose, onRemove, items = [] }) {
-  const { cartItems, setCartItems } = useContext(AppContext);
+  const { cartItems, setCartItems, totalPrice } = useCart();
   const [orderId, setOrderId] = useState(null);
   const [isOrderCompleted, setIsOrederCompleted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -78,12 +78,12 @@ export default function Drawer({ onClose, onRemove, items = [] }) {
                 <li>
                   <span>Total:</span>
                   <div></div>
-                  <b>120.00$</b>
+                  <b>{totalPrice}</b>
                 </li>
                 <li>
                   <span>Taxes 13%:</span>
                   <div></div>
-                  <b>15.60$</b>
+                  <b>{+(totalPrice * 0.13).toFixed(2)}</b>
                 </li>
               </ul>
               <button
