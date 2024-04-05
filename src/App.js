@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import AppContext from "./context";
+import Orders from "./pages/Orders";
 
 export default function App() {
   const [items, setItems] = useState([])
@@ -79,7 +80,7 @@ export default function App() {
   }
 
   return (
-    <AppContext.Provider value={{ items, cartItems, favorites, isItemAdded, onAddToFavorite, setCartOpened, setCartItems }}>
+    <AppContext.Provider value={{ items, cartItems, favorites, isItemAdded, onAddToFavorite, onAddToCart, setCartOpened, setCartItems }}>
       <div className="wrapper clear">
         {cartOpened && <Drawer items={cartItems}
           onClose={() => setCartOpened(false)}
@@ -92,7 +93,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home
             items={items}
-            //cartItems={cartItems}
+            cartItems={cartItems}
             searchValue={searchValue}
             setSearchValue={setSearchValue}
             onChangeSearchInput={onChangeSearchInput}
@@ -102,6 +103,9 @@ export default function App() {
           />} />
 
           <Route path="/favorites" element={<Favorites
+          />} />
+
+          <Route path="/orders" element={<Orders
           />} />
         </Routes>
 
