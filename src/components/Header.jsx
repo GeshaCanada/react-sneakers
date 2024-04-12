@@ -11,7 +11,7 @@ export default function Header(props) {
           <img
             width={40}
             height={40}
-            src="/img/logo.png"
+            src="img/logo.png"
             alt="Logo for sneakers shop"
           />
           <div>
@@ -26,7 +26,7 @@ export default function Header(props) {
           <img
             width={18}
             height={18}
-            src="/img/shop_cart.svg"
+            src="img/shop_cart.svg"
             alt="Shop's cart"
           />
           <span>{totalPrice}$</span>
@@ -36,7 +36,7 @@ export default function Header(props) {
             <img
               width={18}
               height={18}
-              src="/img/favorite_heart.svg"
+              src="img/favorite_heart.svg"
               alt="Bookmarks"
             />
           </Link>
@@ -46,7 +46,7 @@ export default function Header(props) {
             <img
               width={18}
               height={18}
-              src="/img/user.svg"
+              src="img/user.svg"
               alt="User's profile"
             />
           </Link>

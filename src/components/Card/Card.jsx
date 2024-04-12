@@ -49,7 +49,7 @@ export default function Card({
             <div className={styles.favorite} onClick={onClickFavorite}>
               <img
                 src={
-                  isFavorite ? "/img/heart_liked.svg" : "/img/heart_unliked.svg"
+                  isFavorite ? "img/heart_liked.svg" : "img/heart_unliked.svg"
                 }
                 alt="Unliked"
               />
@@ -69,7 +69,7 @@ export default function Card({
                 className={styles.plus}
                 onClick={onClickPlus}
                 src={
-                  isItemAdded(id) ? "/img/btn_checked.svg" : "/img/btn_plus.svg"
+                  isItemAdded(id) ? "img/btn_checked.svg" : "img/btn_plus.svg"
                 }
                 alt="Plus"
               />

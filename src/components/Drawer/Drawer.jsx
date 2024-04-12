@@ -45,7 +45,7 @@ export default function Drawer({ onClose, onRemove, items = [], opened }) {
           <img
             onClick={onClose}
             className="cu-p"
-            src="/img/btn_remove.svg"
+            src="img/btn_remove.svg"
             alt="Close"
           />
         </h2>
@@ -70,7 +70,7 @@ export default function Drawer({ onClose, onRemove, items = [], opened }) {
                   <img
                     onClick={() => onRemove(obj.id)}
                     className="removeBtn"
-                    src="/img/btn_remove.svg"
+                    src="img/btn_remove.svg"
                     alt="Remove"
                   />
                 </div>
@@ -95,7 +95,7 @@ export default function Drawer({ onClose, onRemove, items = [], opened }) {
                 className="greenButton"
               >
                 Place your order
-                <img src="/img/arrow.svg" alt="Arrow" />{" "}
+                <img src="img/arrow.svg" alt="Arrow" />{" "}
               </button>
             </div>
           </div>
@@ -109,8 +109,8 @@ export default function Drawer({ onClose, onRemove, items = [], opened }) {
             }
             image={
               isOrderCompleted
-                ? "/img/order_completed.svg"
-                : "/img/empty_cart.svg"
+                ? "img/order_completed.svg"
+                : "img/empty_cart.svg"
             }
           />
         )}
