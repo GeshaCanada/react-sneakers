@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Route, Routes } from 'react-router-dom';
 import axios from "axios";
-import Drawer from "./components/Drawer";
+import Drawer from "./components/Drawer/Drawer";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
@@ -19,43 +19,57 @@ export default function App() {
 
   useEffect(() => {
     async function fetchData() {
+      try {
 
+        const [cartResponse, favoritesResponse, itemsResponse] = await Promise.all([
+          axios.get("https://65e4b3b13070132b3b2528ae.mockapi.io/cart"),
+          axios.get("https://65ea6f38c9bf92ae3d3b8616.mockapi.io/favorite"),
+          axios.get("https://65e4b3b13070132b3b2528ae.mockapi.io/items")
+        ])
 
-      const cartResponse = await axios.get("https://65e4b3b13070132b3b2528ae.mockapi.io/cart")
-      const favoritesResponse = await axios.get("https://65ea6f38c9bf92ae3d3b8616.mockapi.io/favorite")
-      const itemsResponse = await axios.get("https://65e4b3b13070132b3b2528ae.mockapi.io/items")
+        setIsLoading(false);
+        setCartItems(cartResponse.data);
+        setFavorites(favoritesResponse.data);
+        setItems(itemsResponse.data);
 
-      setIsLoading(false)
-
-      setCartItems(cartResponse.data)
-      setFavorites(favoritesResponse.data)
-      setItems(itemsResponse.data)
-
-      console.log("Cart items:", cartResponse.data);
-      console.log("Items:", itemsResponse.data);
-
+      } catch (error) {
+        alert("Error fetching data ;(");
+        console.error("Error fetching data:", error);
+      }
     }
 
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
+
 
   const onAddToCart = async (obj) => {
-
-    if (cartItems.find(item => (item.id) === (obj.id))) {
-      axios.delete(`https://65e4b3b13070132b3b2528ae.mockapi.io/cart/${obj.id}`)
-      setCartItems(prev => prev.filter(item => (item.id) !== (obj.id)))
-    } else {
-      axios.post("https://65e4b3b13070132b3b2528ae.mockapi.io/cart", obj);
-      setCartItems(prev => [...prev, obj]);
+    try {
+      const findItem = cartItems.find(item => item.parentId === obj.id)
+      if (findItem) {
+        setCartItems(prev => prev.filter(item => item.parentId !== obj.id));
+        await axios.delete(`https://65e4b3b13070132b3b2528ae.mockapi.io/cart/${findItem.id}`);
+      } else {
+        setCartItems(prev => [...prev, obj]);
+        await axios.post("https://65e4b3b13070132b3b2528ae.mockapi.io/cart", obj);
+      }
+    } catch (error) {
+      alert("Error adding item to cart");
+      console.error("Error adding item to cart:", error);
     }
+  };
 
-  }
 
 
-  const onRemoveItem = (id) => {
-    axios.delete(`https://65e4b3b13070132b3b2528ae.mockapi.io/cart/${id}`)
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
-  }
+  const onRemoveItem = async (id) => {
+    try {
+      await axios.delete(`https://65e4b3b13070132b3b2528ae.mockapi.io/cart/${id}`);
+      setCartItems((prev) => prev.filter((item) => item.id !== id));
+    } catch (error) {
+      alert("Error removing item from cart");
+      console.error("Error removing item from cart:", error);
+    }
+  };
+
 
   const onAddToFavorite = async (obj) => {
     try {
@@ -66,7 +80,8 @@ export default function App() {
         setFavorites(prev => [...prev, data]);
       }
     } catch (error) {
-      alert("Can't added to favorites");
+      alert("Error add to favorites");
+      console.error("Error add to favorites:", error);
     }
   }
 
@@ -76,15 +91,16 @@ export default function App() {
   }
 
   const isItemAdded = (id) => {
-    return cartItems.some((obj) => obj.id === id)
+    return cartItems.some((obj) => obj.parentId === id)
   }
 
   return (
     <AppContext.Provider value={{ items, cartItems, favorites, isItemAdded, onAddToFavorite, onAddToCart, setCartOpened, setCartItems }}>
       <div className="wrapper clear">
-        {cartOpened && <Drawer items={cartItems}
+        <Drawer items={cartItems}
           onClose={() => setCartOpened(false)}
-          onRemove={onRemoveItem} />}
+          onRemove={onRemoveItem}
+          opened={cartOpened} />
 
         <Header onClickCart={() => setCartOpened(true)} />
 

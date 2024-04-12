@@ -13,7 +13,7 @@ export default function Orders() {
         const { data } = await axios.get(
           "https://65ea6f38c9bf92ae3d3b8616.mockapi.io/orders"
         );
-        setOrders(data.map((obj) => obj.items).flat());
+        setOrders(data.map((obj) => obj.items).flat()); // or (data.reduce((prev, obj) => [...prev, ...obj.items], []));
         setIsLoading(false);
       } catch (error) {
         alert("Error of order request");
